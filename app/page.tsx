@@ -1,6 +1,11 @@
 import { Filters, LocationWrap } from '@/components';
+import { QueryParams } from '@/interfaces';
+interface Props {
+  searchParams: QueryParams;
+}
 
-export default function Home() {
+export default function Home({ searchParams }: Props) {
+  const query = searchParams ?? {};
   return (
     <div className='py-10'>
       <header>
@@ -12,8 +17,8 @@ export default function Home() {
       </header>
       <main className='mt-10'>
         <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-2'>
-          <Filters />
-          <LocationWrap />
+          <Filters query={query} />
+          <LocationWrap query={query} />
         </div>
       </main>
     </div>

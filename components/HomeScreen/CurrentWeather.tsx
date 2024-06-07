@@ -4,6 +4,21 @@ import { fetchWeather } from '@/actions/WeatherMap';
 import { Loading } from '../ui';
 import { WeatherResponse } from '@/interfaces';
 
+const units = [
+  {
+    value: 'imperial',
+    label: 'F',
+  },
+  {
+    value: 'metric',
+    label: 'C',
+  },
+  {
+    value: 'standard',
+    label: 'K',
+  },
+];
+
 interface CurrentWeatherProps {
   location: {
     latitude: number;
@@ -15,6 +30,7 @@ interface CurrentWeatherProps {
 const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<WeatherResponse>();
+  const [currentUnit, setCurrentUnit] = useState('K');
   const [error, setError] = useState<string>();
   const handleFetchWeather = () => {
     if (!location) return;
@@ -22,6 +38,12 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
       try {
         const data = await fetchWeather({ location, unit });
         setData(data);
+        if (unit) {
+          const selectedUnit = units.find((item) => item.value === unit);
+          if (selectedUnit) {
+            setCurrentUnit(selectedUnit.label);
+          }
+        }
       } catch (error) {
         setError('Error fetching weather data');
       }
@@ -30,7 +52,7 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
 
   useEffect(() => {
     handleFetchWeather();
-  }, [location]);
+  }, [location, unit]);
 
   if (isPending || !data) {
     return (
@@ -61,8 +83,9 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
       <div>
         <h3 className='text-3xl font-semibold text-gray-800 dark:text-white text-center'>
           {data?.main.temp}°
+          <span className='text-2xl font-normal ml-1'>{currentUnit}</span>
         </h3>
-        <p className='text-gray-800 dark:text-white text-center'>
+        <p className='text-gray-800 dark:text-white text-center capitalize'>
           {data?.weather[0].description}
         </p>
       </div>

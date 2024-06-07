@@ -1,16 +1,26 @@
 'use client';
 import { XCircleIcon } from '@heroicons/react/24/outline';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { FC, Suspense, useEffect, useState } from 'react';
 import CurrentWeather from './CurrentWeather';
+import { QueryParams } from '@/interfaces';
 
-const LocationWrap = () => {
+interface LocationWrapProps {
+  query: QueryParams;
+}
+
+const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
   const [location, setLocation] = useState<{
     latitude: number;
     longitude: number;
   }>();
   const [error, setError] = useState<string>();
 
-  useEffect(() => {
+  const handleLocation = () => {
+    const { latitude, longitude } = query;
+    if (latitude && longitude) {
+      setLocation({ latitude, longitude });
+      return;
+    }
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -26,6 +36,10 @@ const LocationWrap = () => {
     } else {
       setError('Geolocation is not supported by your browser');
     }
+  };
+
+  useEffect(() => {
+    handleLocation();
   }, []);
 
   if (error) {
@@ -57,7 +71,7 @@ const LocationWrap = () => {
     <div className='flex flex-col space-y-4'>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
         <div className='col-span-1 sm:col-span-2'>
-          <CurrentWeather location={location!} />
+          <CurrentWeather location={location!} unit={query.unit} />
         </div>
       </div>
     </div>
