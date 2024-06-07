@@ -37,7 +37,7 @@ const Header = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className='border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium dark:text-white dark:hover:text-gray-200 dark:hover:border-gray-200'
+                      className='border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium dark:text-white dark:hover:text-gray-200 dark:hover:border-indigo-600'
                       activeClassName='border-indigo-500 text-gray-900'
                     >
                       {item.name}
