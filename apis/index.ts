@@ -1,2 +1,2 @@
 export { default as ApiOpenWeatherMap } from './ApiOpenWeatherMap';
-export { default as ApiCountries } from './ApiCountries';
+export { default as ApiGeo } from './ApiGeo';
