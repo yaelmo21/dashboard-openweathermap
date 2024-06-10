@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang='en' className='h-full pt-safe'>
       <body className='h-full'>
         <Header />
-        <main className='h-full pt-16'>{children}</main>
+        <main className='h-full pt-16 overflow-y-auto'>{children}</main>
       </body>
     </html>
   );
