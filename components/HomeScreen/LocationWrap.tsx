@@ -87,6 +87,15 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
               <div className='mt-2 text-sm text-red-700'>
                 <p>{error}</p>
               </div>
+              <div className='mt-4 flex space-x-2 justify-center'>
+                <button
+                  type='button'
+                  className='text-red-400 hover:text-red-500 bg-red-100 px-2 py-1 rounded-md'
+                  onClick={handleLocation}
+                >
+                  reintentar
+                </button>
+              </div>
             </div>
             <div>
               <button
