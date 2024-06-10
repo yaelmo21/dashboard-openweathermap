@@ -28,8 +28,8 @@ export default async function Home({ searchParams }: Props) {
           </h1>
         </div>
       </header>
-      <main className='mt-10'>
-        <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-2'>
+      <main className='mt-10 overflow-y-auto'>
+        <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-2 h-full overflow-y-auto'>
           <LocationWrap query={query} />
         </div>
       </main>
