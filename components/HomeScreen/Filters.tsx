@@ -141,7 +141,18 @@ const Filters: FC<FiltersProps> = ({ query }) => {
             return;
           }
           const currentState = getStateByName(currentCountry.isoCode, state);
-          if (!currentState) return;
+          if (!currentState) {
+            setInitData({
+              unit: Units[2],
+              country: {
+                label: currentCountry.name,
+                value: currentCountry.isoCode,
+              },
+              state: null,
+              city: null,
+            });
+            return;
+          }
           const currentCity = getCityByName(
             currentCountry.isoCode,
             currentState.isoCode,
