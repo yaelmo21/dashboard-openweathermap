@@ -20,12 +20,12 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Screenshots
 
-![Image dashboard 1]('screens/1.png')
-![Image dashboard 2]('screens/2.png')
-![Image dashboard 3]('screens/3.png')
-![Image dashboard 4]('screens/4.png')
-![Image dashboard 5]('screens/5.png')
-![Image dashboard 6]('screens/6.png')
+![Image dashboard 1](screens/1.png)
+![Image dashboard 2](screens/2.png)
+![Image dashboard 3](screens/3.png)
+![Image dashboard 4](screens/4.png)
+![Image dashboard 5](screens/5.png)
+![Image dashboard 6](screens/6.png)
 
 ## Learn More
 
