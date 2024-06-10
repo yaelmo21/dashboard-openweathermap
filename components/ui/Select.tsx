@@ -1,5 +1,5 @@
 'use client';
-import { FC } from 'react';
+import { FC, useId } from 'react';
 import {
   Listbox,
   ListboxButton,
@@ -34,19 +34,24 @@ const Select: FC<SelectProps> = ({
   classNameLabel,
   disabled,
 }) => {
+  const id = useId();
   return (
     <div className='w-full'>
       {label && (
         <label
+          htmlFor={id}
           className={clsx(
             'block text-sm font-medium leading-6 text-gray-900 mb-2 dark:text-gray-200',
             classNameLabel,
           )}
+          aria-label={label}
         >
           {label}
         </label>
       )}
       <Listbox
+        as='div'
+        id={id}
         value={value}
         onChange={onChange}
         name={name}
