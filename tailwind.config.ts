@@ -15,6 +15,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animated')],
+  plugins: [require('tailwindcss-animated'), require('tailwindcss-safe-area')],
 };
 export default config;

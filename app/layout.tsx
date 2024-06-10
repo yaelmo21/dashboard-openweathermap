@@ -13,10 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='h-full'>
+    <html lang='en' className='h-full pt-safe'>
       <body className='h-full'>
         <Header />
-        {children}
+        <main className='h-full pt-16'>{children}</main>
       </body>
     </html>
   );

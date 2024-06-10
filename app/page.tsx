@@ -1,8 +1,20 @@
 import { LocationWrap } from '@/components';
 import { QueryParams } from '@/interfaces';
+import { Metadata } from 'next';
 interface Props {
   searchParams: QueryParams;
 }
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description:
+    'Dashboard de la aplicación de clima con Next.js y Tailwind CSS  🌦️',
+  authors: [
+    {
+      name: 'Yael Ruiz',
+    },
+  ],
+};
 
 export default async function Home({ searchParams }: Props) {
   const query = searchParams ?? {};

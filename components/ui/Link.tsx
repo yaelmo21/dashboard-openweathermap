@@ -1,8 +1,8 @@
 'use client';
+import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import NextLink from 'next/link';
 import clsx from 'clsx';
-import { FC } from 'react';
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   href: string;
@@ -17,11 +17,12 @@ const Link: FC<LinkProps> = ({
   ...props
 }) => {
   const pathname = usePathname();
+
   return (
     <NextLink
-      {...props}
       href={href}
-      className={clsx(href === pathname && activeClassName, className)}
+      className={clsx(className, href === pathname && activeClassName)}
+      {...props}
     >
       {children}
     </NextLink>

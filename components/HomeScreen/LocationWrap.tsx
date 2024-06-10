@@ -4,6 +4,8 @@ import React, { FC, Suspense, useEffect, useState } from 'react';
 import CurrentWeather from './CurrentWeather';
 import { QueryParams } from '@/interfaces';
 import Filters from './Filters';
+import Forecast from './Forecast';
+import ForecastHours from './ForecastHours';
 
 interface LocationWrapProps {
   query: QueryParams;
@@ -45,7 +47,6 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
     const { latitude, longitude } = query;
     if (latitude && longitude) {
       setLocation({ latitude, longitude });
-      return;
     }
   };
 
@@ -94,6 +95,12 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
         <div className='col-span-1 sm:col-span-2'>
           <CurrentWeather location={location!} unit={query.unit} />
+        </div>
+        <div className='col-span-1 sm:col-span-3'>
+          <ForecastHours location={location!} unit={query.unit} />
+        </div>
+        <div className='col-span-1 sm:col-span-5'>
+          <Forecast location={location!} unit={query.unit} />
         </div>
       </div>
     </div>

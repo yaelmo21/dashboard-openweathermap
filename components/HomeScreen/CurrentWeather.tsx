@@ -3,21 +3,7 @@ import { TiWeatherCloudy } from 'react-icons/ti';
 import { fetchWeather } from '@/actions/WeatherMap';
 import { Loading } from '../ui';
 import { WeatherResponse } from '@/interfaces';
-
-const units = [
-  {
-    value: 'imperial',
-    label: 'F',
-  },
-  {
-    value: 'metric',
-    label: 'C',
-  },
-  {
-    value: 'standard',
-    label: 'K',
-  },
-];
+import { UnitSmall } from '@/shared';
 
 interface CurrentWeatherProps {
   location: {
@@ -39,7 +25,7 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
         const data = await fetchWeather({ location, unit });
         setData(data);
         if (unit) {
-          const selectedUnit = units.find((item) => item.value === unit);
+          const selectedUnit = UnitSmall.find((item) => item.value === unit);
           if (selectedUnit) {
             setCurrentUnit(selectedUnit.label);
           }
@@ -56,7 +42,7 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
 
   if (isPending || !data) {
     return (
-      <div className='w-fullbg-white dark:bg-gray-800 shadow-lg rounded-lg p-4'>
+      <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex items-center justify-center'>
         <Loading />
       </div>
     );
@@ -64,7 +50,7 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
 
   if (error) {
     return (
-      <div className='w-fullbg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 min-h-full'>
+      <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 min-h-full'>
         <span className='text-red-700' data-testid='error'>
           {error}
         </span>
@@ -73,7 +59,13 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
   }
 
   return (
-    <div className='w-fullbg-white dark:bg-gray-800 shadow-lg rounded-lg p-4'>
+    <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex flex-col justify-between'>
+      <h3
+        className='text-lg font-semibold text-gray-800 dark:text-white text-center'
+        data-testid='location'
+      >
+        <span className='text-gray-800 dark:text-white'>Clima en </span>
+      </h3>
       <h2 className='text-xl font-semibold text-gray-800 dark:text-white text-center'>
         {data?.name}
       </h2>
@@ -85,6 +77,19 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
           {data?.main.temp}°
           <span className='text-2xl font-normal ml-1'>{currentUnit}</span>
         </h3>
+        <p
+          className='text-gray-800 dark:text-white text-center flex justify-center gap-2'
+          data-testid='weather-info'
+        >
+          <small>
+            <span className='text-gray-800 dark:text-white'>Min:</span>{' '}
+            {data?.main.temp_min}° {currentUnit}
+          </small>
+          <small>
+            <span className='text-gray-800 dark:text-white'>Max:</span>{' '}
+            {data?.main.temp_max}° {currentUnit}
+          </small>
+        </p>
         <p className='text-gray-800 dark:text-white text-center capitalize'>
           {data?.weather[0].description}
         </p>

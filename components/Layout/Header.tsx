@@ -22,9 +22,9 @@ const Header = () => {
   return (
     <Disclosure
       as='nav'
-      className='border-b border-gray-200 bg-white  dark:bg-gray-800 dark:border-gray-700 dark:text-white'
+      className='border-b border-gray-200 bg-white  dark:bg-gray-800 dark:border-gray-700 dark:text-white fixed w-full z-10 top-0'
     >
-      {({ open }) => (
+      {({ open, close }) => (
         <>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='flex h-16 justify-between'>
@@ -37,8 +37,8 @@ const Header = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className='border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium dark:text-white dark:hover:text-gray-200 dark:hover:border-indigo-600'
-                      activeClassName='border-indigo-500 text-gray-900'
+                      className='border-transparent text-gray-500 hover:border-indigo-300 hover:text-gray-700 inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium dark:text-white dark:hover:text-gray-200 dark:hover:border-indigo-600'
+                      activeClassName='border-indigo-500 text-gray-900 dark:text-white dark:border-indigo-500 dark:hover:text-gray-200 dark:hover:border-gray-200'
                     >
                       {item.name}
                     </Link>
@@ -69,7 +69,7 @@ const Header = () => {
                     href={item.href}
                     className='text-start border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 block border-l-4 py-2 pl-3 pr-4 text-base font-medium 
                     dark:text-white dark:hover:text-gray-200 dark:hover:border-gray-200  dark:bg-gray-800 dark:hover:bg-gray-700  dark:pl-4 dark:pr-5 dark:py-3 dark:text-lg'
-                    activeClassName='border-indigo-500 bg-indigo-50 text-indigo-700'
+                    activeClassName='border-indigo-500 text-gray-900 dark:text-white dark:border-indigo-500 dark:hover:text-gray-200 dark:hover:border-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:pl-4 dark:pr-5 dark:py-3 dark:text-lg'
                   >
                     {item.name}
                   </Link>
