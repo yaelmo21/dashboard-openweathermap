@@ -124,10 +124,10 @@ const Forecast: FC<ForecastProps> = ({ location, unit }) => {
     );
   }
 
-  if (isPending || !content) {
+  if ((isPending || !content) && !error) {
     return (
       <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex items-center justify-center'>
-        <Loading />
+        <Loading data-testid='loading' />
       </div>
     );
   }

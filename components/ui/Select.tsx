@@ -1,5 +1,5 @@
 'use client';
-import { FC } from 'react';
+import { FC, useId } from 'react';
 import {
   Listbox,
   ListboxButton,
@@ -34,19 +34,24 @@ const Select: FC<SelectProps> = ({
   classNameLabel,
   disabled,
 }) => {
+  const id = useId();
   return (
     <div className='w-full'>
       {label && (
         <label
+          htmlFor={id}
           className={clsx(
             'block text-sm font-medium leading-6 text-gray-900 mb-2 dark:text-gray-200',
             classNameLabel,
           )}
+          aria-label={label}
         >
           {label}
         </label>
       )}
       <Listbox
+        as='div'
+        id={id}
         value={value}
         onChange={onChange}
         name={name}
@@ -59,9 +64,8 @@ const Select: FC<SelectProps> = ({
                 'relative w-full cursor-default rounded-md py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset focus:outline-none sm:text-sm sm:leading-6',
                 'bg-white text-gray-900 ring-gray-300 focus:ring-indigo-600',
                 'dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:focus:ring-indigo-500',
-                disabled
-                  ? 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-400'
-                  : '',
+                disabled &&
+                  'bg-gray-100 text-gray-400 dark:bg-gray-500 dark:text-gray-500',
               )}
             >
               <span className='block truncate'>
