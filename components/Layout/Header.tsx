@@ -64,16 +64,16 @@ const Header = () => {
           <DisclosurePanel className='sm:hidden'>
             <div className='space-y-1 pb-3 pt-2 flex flex-col'>
               {navigation.map((item) => (
-                <DisclosureButton key={item.name}>
-                  <Link
-                    href={item.href}
-                    className='text-start border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 block border-l-4 py-2 pl-3 pr-4 text-base font-medium 
+                <Link
+                  key={item.name}
+                  onClick={() => close()}
+                  href={item.href}
+                  className='text-start border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 block border-l-4 py-2 pl-3 pr-4 text-base font-medium 
                     dark:text-white dark:hover:text-gray-200 dark:hover:border-gray-200  dark:bg-gray-800 dark:hover:bg-gray-700  dark:pl-4 dark:pr-5 dark:py-3 dark:text-lg'
-                    activeClassName='border-indigo-500 text-gray-900 dark:text-white dark:border-indigo-500 dark:hover:text-gray-200 dark:hover:border-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:pl-4 dark:pr-5 dark:py-3 dark:text-lg'
-                  >
-                    {item.name}
-                  </Link>
-                </DisclosureButton>
+                  activeClassName='border-indigo-500 text-gray-900 dark:text-white dark:border-indigo-500 dark:hover:text-gray-200 dark:hover:border-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:pl-4 dark:pr-5 dark:py-3 dark:text-lg'
+                >
+                  {item.name}
+                </Link>
               ))}
             </div>
           </DisclosurePanel>
