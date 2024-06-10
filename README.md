@@ -67,4 +67,4 @@ Make sure to replace the placeholder values with your actual API keys and URLs.
 
 ## Live Demo
 
-You can view the live demo of the project [here](https://vercel.com/yaelmos-projects/dashboard-openweathermap).
+You can view the live demo of the project [here](https://dashboard-openweathermap.vercel.app).
