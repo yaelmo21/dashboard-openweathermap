@@ -131,14 +131,14 @@ const ForecastHours: FC<ForecastHoursProps> = ({ location, unit }) => {
   if (isPending || !content) {
     return (
       <div className='w-full h-full  bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex items-center justify-center'>
-        <Loading />
+        <Loading data-testid='loading' />
       </div>
     );
   }
 
   return (
     <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 '>
-      <Line options={options} data={data} />
+      <Line options={options} data={data} data-testid='forecast-canvas' />
     </div>
   );
 };

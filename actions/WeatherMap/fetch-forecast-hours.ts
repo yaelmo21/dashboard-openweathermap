@@ -37,8 +37,5 @@ export default async function fetchForecastHours({
       .toDate();
     return moment(currentDate).isSame(date, 'day');
   });
-
-  console.log(list.length);
-
   return list;
 }

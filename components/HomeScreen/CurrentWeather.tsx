@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, useTransition } from 'react';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { fetchWeather } from '@/actions/WeatherMap';
-import { Loading } from '../ui';
+import { Loading, Tooltip } from '../ui';
 import { WeatherResponse } from '@/interfaces';
 import { UnitSmall } from '@/shared';
 
@@ -40,10 +40,10 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
     handleFetchWeather();
   }, [location, unit]);
 
-  if (isPending || !data) {
+  if ((isPending || !data) && !error) {
     return (
       <div className='w-full h-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex items-center justify-center'>
-        <Loading />
+        <Loading data-testid='loading' />
       </div>
     );
   }
@@ -73,10 +73,12 @@ const CurrentWeather: FC<CurrentWeatherProps> = ({ location, unit }) => {
         <TiWeatherCloudy className='h-40 w-40 text-gray-800 dark:text-white mx-auto' />
       </div>
       <div>
-        <h3 className='text-3xl font-semibold text-gray-800 dark:text-white text-center'>
-          {data?.main.temp}°
-          <span className='text-2xl font-normal ml-1'>{currentUnit}</span>
-        </h3>
+        <Tooltip text='Temperatura actual'>
+          <h3 className='text-3xl font-semibold text-gray-800 dark:text-white text-center'>
+            {data?.main.temp}°
+            <span className='text-2xl font-normal ml-1'>{currentUnit}</span>
+          </h3>
+        </Tooltip>
         <p
           className='text-gray-800 dark:text-white text-center flex justify-center gap-2'
           data-testid='weather-info'
