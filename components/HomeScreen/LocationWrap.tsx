@@ -1,6 +1,7 @@
 'use client';
-import { XCircleIcon } from '@heroicons/react/24/outline';
-import React, { FC, Suspense, useEffect, useState } from 'react';
+import { XCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Country } from 'country-state-city';
+import React, { FC, useEffect, useState } from 'react';
 import CurrentWeather from './CurrentWeather';
 import { QueryParams } from '@/interfaces';
 import Filters from './Filters';
@@ -36,10 +37,20 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
         },
         (error) => {
           setError(error.message);
+          const mexico = Country.getCountryByCode('MX');
+          setLocation({
+            latitude: Number(mexico?.latitude) || 0,
+            longitude: Number(mexico?.longitude) || 0,
+          });
         },
       );
     } else {
-      setError('Geolocation is not supported by your browser');
+      setError('Geolocation is not available');
+      const mexico = Country.getCountryByCode('MX');
+      setLocation({
+        latitude: Number(mexico?.latitude) || 23.6345,
+        longitude: Number(mexico?.longitude) || -102.5528,
+      });
     }
   };
 
@@ -58,9 +69,9 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
     handleQuery();
   }, [query]);
 
-  if (error) {
-    return (
-      <div className='flex flex-col space-y-4'>
+  return (
+    <div className='flex flex-col space-y-4'>
+      {error && (
         <div className='rounded-md bg-red-50 p-4'>
           <div className='flex'>
             <div className='flex-shrink-0'>
@@ -69,7 +80,7 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
                 aria-hidden='true'
               />
             </div>
-            <div className='ml-3'>
+            <div className='ml-3 flex-1'>
               <h3 className='text-sm font-medium text-red-800'>
                 Ocurrio un error
               </h3>
@@ -77,14 +88,19 @@ const LocationWrap: FC<LocationWrapProps> = ({ query }) => {
                 <p>{error}</p>
               </div>
             </div>
+            <div>
+              <button
+                type='button'
+                className='text-red-400 hover:text-red-500'
+                onClick={() => setError('')}
+              >
+                <span className='sr-only'>Cerrar</span>
+                <XMarkIcon className='h-5 w-5' aria-hidden='true' />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className='flex flex-col space-y-4'>
+      )}
       <Filters
         query={{
           ...query,
