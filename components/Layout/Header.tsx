@@ -13,7 +13,7 @@ const navigation = [
     href: '/',
   },
   {
-    name: 'About',
+    name: 'Acerca de',
     href: '/about',
   },
 ];
